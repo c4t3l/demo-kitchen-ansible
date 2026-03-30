@@ -1,9 +1,0 @@
----
-user:
-  username: ljenkins
-  password: changeme
-  comment: "Leroy Jenkins"
-
-zshconf:
-  # yamllint disable rule:line-length
-  url: "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
