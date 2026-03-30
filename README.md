@@ -13,6 +13,7 @@ You must have the following installed:
 - ruby >=3.1
 - ruby-bundler >=2.5
 - python >=3.9 
+- python-pip >=20.0
 
 
 ### Installation
