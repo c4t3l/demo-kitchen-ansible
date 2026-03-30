@@ -1,7 +1,5 @@
 # Workstation
 
-[![Copr build status](https://copr.fedorainfracloud.org/coprs/rcallicotte/setup-workstation/package/setup-workstation/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/rcallicotte/setup-workstation/package/setup-workstation/)
-
 This is a playbook for setting up a KDE workstation.
 
 ## Using kitchen-ci
@@ -27,14 +25,10 @@ Run [new-image.sh] to create a new qcow2 image.
 
 ### Runing kitchen
 
-The usual way: `kitchen test`
-
-Quick way: `kitchen verify`
-
-Setup: `kitchen converge`
-
-With sdl: `DPY=sdl kitchen converge`
-
+The usual way: `kitchen test`  
+Quick way: `kitchen verify`  
+Setup: `kitchen converge`  
+With sdl: `DPY=sdl kitchen converge`  
 With gtk: `DPY=gtk kitchen converge`
 
 You must have sdl and/or gtk installed to display graphical console.
