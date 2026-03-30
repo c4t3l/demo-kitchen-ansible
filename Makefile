@@ -9,6 +9,7 @@ inst-prereqs:
 	./prereqs.sh
 
 inst-ruby:
+	bundle config set --local path '~/.local/share/gem'
 	bundle install --gemfile=Gemfile
 
 inst-python:
