@@ -6,7 +6,7 @@ SHELL = /bin/bash
 install: inst-prereqs inst-ruby inst-python
 
 inst-prereqs:
-	./pre-install.sh
+	./prereqs.sh
 
 inst-ruby:
 	bundle install --gemfile=Gemfile
