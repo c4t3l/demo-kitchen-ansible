@@ -11,9 +11,14 @@ applications for the KDE desktop environment.
 You must have the following installed:
 
 - ruby >=3.1
-- ruby-bundler >=2.5
+- ruby-devel(ruby-dev) >=3.1
+- rubygem-bundler(bundler) >=2.5
 - python >=3.9 
-- python-pip >=20.0
+- python3-pip >=20.0
+- libyaml-devel(libyaml-dev)
+- gcc
+- make
+- git
 
 
 ### Installation
