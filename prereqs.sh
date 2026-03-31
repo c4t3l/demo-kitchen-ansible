@@ -20,8 +20,11 @@ echo "Using package manager: $PKG_MANAGER"
 if [ "$PKG_MANAGER" = "apt" ]; then
 sudo apt-get update
 sudo apt-get install -y \
+ansible \
+podman \
 python3 \
 python3-pip \
+python3.13-venv \
 ruby \
 ruby-dev \
 bundler \
@@ -31,6 +34,8 @@ libyaml-dev
 
 elif [ "$PKG_MANAGER" = "dnf" ]; then
 sudo dnf install -y \
+ansible \
+podman \
 python3 \
 python3-pip \
 ruby \
@@ -42,6 +47,8 @@ libyaml-devel
 
 elif [ "$PKG_MANAGER" = "pacman" ]; then
 sudo pacman -Sy --noconfirm \
+ansible \
+podman \
 python \
 python-pip \
 ruby \
