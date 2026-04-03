@@ -1,0 +1,7 @@
+FROM dokken/fedora-42
+RUN dnf clean all
+RUN dnf install -y sudo openssh-server openssh-clients which curl
+RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+RUN [ -f "/etc/ssh/ssh_host_ed25519_key" ] || ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
+
+

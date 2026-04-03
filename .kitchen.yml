@@ -1,0 +1,44 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+  privileged: true
+  binary: ./podman-wrapper.sh
+  require_chef_omnibus: false
+
+
+provisioner:
+  name: ansible_playbook
+  roles_path: roles
+  additional_copy_path: vars
+  ansible_verbose: false
+  ansible_vault_password_file: .ansible-password.txt
+  ansible_check: false
+  require_chef_for_busser: false
+  hosts: desktop
+
+platforms:
+  - name: f42
+    driver:
+      image: dokken/fedora-42
+      platform: fedora
+      dockerfile: test/Containerfile.fedora
+
+
+
+# lifecycle:
+#   post_create:
+#     - remote: >
+#         sudo dnf -y install
+#         ansible-collection-community-general
+#         python3-passlib
+
+suites:
+  - name: default
+
+verifier:
+  name: shell
+  command: >
+    pytest -vvvrxXs --color=yes
+    --hosts="paramiko://${KITCHEN_USERNAME}@${KITCHEN_HOSTNAME}:${KITCHEN_PORT}?ssh_identity_file=${KITCHEN_SSH_KEY}"
+    --sudo test/integration/${KITCHEN_SUITE}
