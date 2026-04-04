@@ -25,7 +25,6 @@ platforms:
       dockerfile: test/Containerfile.fedora
 
 
-
 # lifecycle:
 #   post_create:
 #     - remote: >

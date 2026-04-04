@@ -1,3 +1,0 @@
-ansible-lint
-pytest>=8.3.4
-pytest-testinfra[ansible,paramiko]>=10.2.2
