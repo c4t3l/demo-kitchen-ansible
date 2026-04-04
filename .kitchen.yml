@@ -5,7 +5,9 @@ driver:
   privileged: true
   binary: ./podman-wrapper.sh
   require_chef_omnibus: false
-
+  private_key: .kitchen/docker_id_ed25519
+  public_key: .kitchen/docker_id_ed25519.pub
+  run_command: /usr/lib/systemd/systemd
 
 provisioner:
   name: ansible_playbook
@@ -16,6 +18,13 @@ provisioner:
   ansible_check: false
   require_chef_for_busser: false
   hosts: desktop
+
+lifecycle:
+  pre_create:
+    - local: >
+        test -f .kitchen/docker_id_ed25519 ||
+        ssh-keygen -t ed25519 -f .kitchen/docker_id_ed25519
+        -N '' -C kitchen_docker_key
 
 platforms:
   - name: f42

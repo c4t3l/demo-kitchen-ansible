@@ -1,5 +1,4 @@
-# FROM <%= @image %>
-FROM dokken/fedora-42
+FROM <%= @image %>
 RUN dnf clean all
 RUN dnf install -y sudo openssh-server openssh-clients which curl
 RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
@@ -17,7 +16,6 @@ RUN chmod 0700 /home/kitchen/.ssh
 RUN touch /home/kitchen/.ssh/authorized_keys
 RUN chown kitchen /home/kitchen/.ssh/authorized_keys
 RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+RUN echo "<%= IO.read(@public_key).strip %>" >> /home/kitchen/.ssh/authorized_keys
 RUN mkdir -p /run/sshd
 CMD /usr/lib/systemd/systemd
-
-
