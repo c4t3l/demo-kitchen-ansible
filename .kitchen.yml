@@ -29,9 +29,15 @@ lifecycle:
 platforms:
   - name: f42
     driver:
-      image: dokken/fedora-42
+      image: docker.io/dokken/fedora-42
       platform: fedora
       dockerfile: test/Containerfile.fedora
+
+  - name: d13
+    driver:
+      image: docker.io/dokken/debian-13
+      platform: debian
+      dockerfile: test/Containerfile.debian
 
 
 # lifecycle:
