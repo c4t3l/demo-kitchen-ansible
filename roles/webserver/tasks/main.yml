@@ -1,0 +1,7 @@
+# webserver/tasks/main.yml
+# control installation and deployment
+# of a simple static web page
+---
+- include_tasks: install.yml
+- include_tasks: config.yml
+- include_tasks: deploy_app.yml

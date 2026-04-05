@@ -12,12 +12,12 @@ driver:
 provisioner:
   name: ansible_playbook
   roles_path: roles
-  additional_copy_path: vars
   ansible_verbose: false
-  ansible_vault_password_file: .ansible-password.txt
   ansible_check: false
   require_chef_for_busser: false
-  hosts: desktop
+  hosts: all
+  playbook: site.yml
+  idempotency_test: true
 
 lifecycle:
   pre_create:
@@ -25,9 +25,6 @@ lifecycle:
         test -f .kitchen/podman_id_ed25519 ||
         ssh-keygen -t ed25519 -f .kitchen/podman_id_ed25519
         -N '' -C kitchen_podman_key
-  post_destroy:
-    - local: >
-        rm -f .kitchen/podman_id_ed25519 .kitchen/podman_id_ed25519.pub
 
 platforms:
   - name: c10s
@@ -49,7 +46,7 @@ platforms:
       dockerfile: test/Containerfile.fedora
 
 suites:
-  - name: default
+  - name: webserver
 
 verifier:
   name: shell

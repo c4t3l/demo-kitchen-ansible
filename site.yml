@@ -1,0 +1,8 @@
+---
+- name: Deploy static web page
+  hosts: all
+  connection: local
+  gather_facts: false
+  become: true
+  roles:
+    - webserver

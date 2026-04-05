@@ -1,7 +1,7 @@
 FROM <%= @image %>
 RUN apt clean
 RUN apt update
-RUN apt install -y sudo openssh-server openssh-client which curl
+RUN apt install -y sudo openssh-server openssh-client which curl ansible-core
 RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
 RUN [ -f "/etc/ssh/ssh_host_ed25519_key" ] || ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
 RUN if ! getent passwd kitchen; then \

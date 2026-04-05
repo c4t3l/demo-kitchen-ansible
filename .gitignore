@@ -1,4 +1,4 @@
 .swp
 .kitchen/
-.pycache/
 .claude/
+__pycache__/

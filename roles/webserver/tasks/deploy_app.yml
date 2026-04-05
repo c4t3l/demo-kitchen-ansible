@@ -1,0 +1,14 @@
+# deploy_app.yml
+# Deploys static webpage
+---
+- name: Create webapp directory
+  ansible.builtin.file:
+    path: /var/www/html
+    owner: root
+    group: root
+    state: directory
+
+- name: Deploy static webpage
+  ansible.builtin.copy:
+    src: files/data/index.html
+    dest: /var/www/html/index.html
