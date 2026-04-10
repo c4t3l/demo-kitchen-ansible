@@ -4,19 +4,32 @@ SHELL = /bin/bash
 PYTHONENV = .demo-kitchen-ansible
 RUBYENV = ~/.local/share/kitchen-ci/gem
 
-.PHONY: install
-install: inst-prereqs inst-ruby inst-python
+.PHONY: install prereqs ruby python copr verify clean
+install: prereqs ruby python
 
-inst-prereqs:
+prereqs:
 	./prereqs.sh
 
-inst-ruby:
+ruby:
 	bundle config set --local path $(RUBYENV)
 	bundle install --gemfile=Gemfile
 
-inst-python:
+python:
 	python3 -m venv $(PYTHONENV)
 	$(PYTHONENV)/bin/pip3 install -r requirements.txt
+
+copr:
+	dnf -y copr enable rcallicotte/test-kitchen
+	dnf -y install rubygem-test-kitchen rubygem-kitchen-docker \
+		rubygem-kitchen-qemu rubygem-kitchen-ansible \
+		python-pytest-testinfra qemu qemu-img kiwi-cli
+
+verify:
+	echo "Verifying installation..."
+	kitchen &>/dev/null \
+	|| bundle exec kitchen &>/dev/null \
+	|| echo "Verfication failed!  Reinstall an try again." \
+	echo "Success!!"
 
 clean:
 	rm -rfd $(RUBYENV)

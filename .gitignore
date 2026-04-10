@@ -1,4 +1,10 @@
 .claude
 .swp
+.ansible/
+.bundle/
 .kitchen/
 .pycache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.tox/

@@ -4,7 +4,7 @@
 set -euo pipefail
 
 # Detect package manager
-source /etc/os-release 
+source /etc/os-release
 
 if [ $ID = "debian" ]; then
     PKG_MANAGER="apt"
@@ -32,7 +32,10 @@ if [ "$PKG_MANAGER" = "apt" ]; then
     bundler \
     make \
     gcc \
-    libyaml-dev
+    libyaml-dev \
+    qemu-utils \
+    qemu-system-x86 \
+    # kiwi #(in unstable/Sid)
 
 elif [ "$PKG_MANAGER" = "dnf" ]; then
     sudo dnf install -y \
@@ -45,7 +48,10 @@ elif [ "$PKG_MANAGER" = "dnf" ]; then
     rubygem-bundler \
     make \
     gcc \
-    libyaml-devel
+    libyaml-devel \
+    qemu \
+    qemu-img \
+    kiwi-cli
 
 elif [ "$PKG_MANAGER" = "pacman" ]; then
     sudo pacman -Sy --noconfirm \
@@ -56,7 +62,9 @@ elif [ "$PKG_MANAGER" = "pacman" ]; then
     ruby \
     ruby-bundler \
     base-devel \
-    libyaml
+    libyaml \
+    qemu-base \
+    # kiwi-ng #(in AUR)
 fi
 
 
