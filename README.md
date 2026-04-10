@@ -27,15 +27,16 @@ Simply run `make` as a non-root user to install kitchen, pytest, and required pl
 > `alias kitchen='bundle exec kitchen'` to your shell's rc file.
 
 > [!NOTE]
-> Debian and Archlinux installations do not install kiwi as it is located either in 
-> Unstable/Sid or the AUR.
+> Debian and Archlinux installations do not install kiwi as it is located either in
+> Unstable/Sid or the AUR. You must install kiwi manually via your distro package
+> manager or via pip.
 
 ### Copr install
 
 If you are running a modern Fedora system you may install via copr repo.  All you need
 to do is run `make copr` to install the pre-built RPMs.
 
-> [!NOTE]
+> [!TIP]
 > Installation via Copr repo is highly recommended!
 
 ### Verify Kitchen installation
