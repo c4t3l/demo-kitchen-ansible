@@ -12,6 +12,11 @@ Kitchen-CI encourages a test-driven development (TDD) workflow: write tests,
 watch them fail, then implement code to make them pass.  Developers can rapidly
 iterate through changes via the following methods.
 
+```mermaid
+  graph LR;
+    A[kitchen create] --> B[kitchen converge] --> C[kitchen verify] --> D[kitchen destroy]
+```
+
 ### Kitchen Create
 
 This is the first step in the process.  It spins up the defined instance(s).  This
