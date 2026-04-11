@@ -1,0 +1,6 @@
+---
+# vars.yml
+# manage playbook variables
+#
+deb_web_loc: /var/www/html
+rh_web_loc: /usr/share/nginx/html

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The History of Cats</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #1a73e8;
+      --dark: #1e293b;
+      --gray: #64748b;
+      --light: #fff8f5;
+      --accent: #e8841a;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* ---------- NAV ---------- */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(30, 41, 59, .95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      padding: .75rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav .logo { color: #fff; font-weight: 700; font-size: 1.15rem; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav a { color: #cbd5e1; text-decoration: none; font-size: .9rem; transition: color .2s; }
+    nav a:hover { color: #fff; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      padding: 6rem 1.5rem 4rem;
+    }
+    .hero .cat-icon { font-size: clamp(4rem, 8vw, 7rem); margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(2.25rem, 5vw, 4rem); font-weight: 800; margin-bottom: .5rem; }
+    .hero h1 span { color: var(--accent); }
+    .hero .tagline { font-size: clamp(1rem, 2vw, 1.35rem); color: #94a3b8; max-width: 620px; margin-bottom: 2rem; }
+    .hero .cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      padding: .85rem 2.25rem;
+      border-radius: .5rem;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .hero .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,132,26,.35); }
+
+    /* ---------- SECTIONS ---------- */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: 1.85rem; font-weight: 700; margin-bottom: .5rem; text-align: center;
+    }
+    .section-sub {
+      text-align: center; color: var(--gray); max-width: 640px; margin: 0 auto 3rem;
+    }
+
+    /* ---------- ORIGINS ---------- */
+    #origins { background: var(--light); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .about-card {
+      background: #fff;
+      border-radius: .75rem;
+      padding: 2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      transition: transform .2s;
+    }
+    .about-card:hover { transform: translateY(-4px); }
+    .about-card .icon { font-size: 2rem; margin-bottom: .75rem; }
+    .about-card h3 { margin-bottom: .5rem; }
+    .about-card p { color: var(--gray); font-size: .95rem; }
+
+    /* ---------- TIMELINE ---------- */
+    #timeline { background: #fff; }
+    .schedule-list { max-width: 720px; margin: 0 auto; }
+    .schedule-item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .schedule-item:last-child { border-bottom: none; }
+    .schedule-time {
+      min-width: 90px;
+      font-weight: 700; color: var(--blue); font-size: .95rem; white-space: nowrap;
+    }
+    .schedule-info h4 { margin-bottom: .15rem; }
+    .schedule-info p { color: var(--gray); font-size: .9rem; }
+
+    /* ---------- FUN FACTS ---------- */
+    #facts { background: var(--light); }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--blue); }
+    .stat-label { color: var(--gray); font-size: .95rem; }
+
+    /* ---------- POP CULTURE ---------- */
+    #culture {
+      background: linear-gradient(135deg, #16213e, #0f3460);
+      color: #fff;
+      text-align: center;
+    }
+    #culture .section-title { color: #fff; }
+    #culture .section-sub { color: #94a3b8; max-width: 680px; }
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .culture-card {
+      background: rgba(255,255,255,.08);
+      border-radius: .75rem;
+      padding: 1.75rem;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .culture-card h4 { color: var(--accent); margin-bottom: .35rem; }
+    .culture-card p { color: #94a3b8; font-size: .9rem; }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: var(--dark);
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: .85rem;
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .schedule-item { flex-direction: column; gap: .35rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Feline<span>History</span></div>
+  <ul>
+    <li><a href="#origins">Origins</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#facts">Fun Facts</a></li>
+    <li><a href="#culture">Pop Culture</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="cat-icon">&#128049;</div>
+  <h1>The History of <span>Cats</span></h1>
+  <p class="tagline">From ancient desert predators to revered gods, seafaring mousers, and internet royalty &mdash; the extraordinary 10,000-year journey of humanity's most enigmatic companion.</p>
+  <a href="#origins" class="cta">Pounce In</a>
+</section>
+
+<!-- ORIGINS -->
+<section id="origins">
+  <div class="container">
+    <h2 class="section-title">How It All Began</h2>
+    <p class="section-sub">The domestic cat's journey from wild hunter to global companion spans thousands of years of mutual benefit, reverence, and cohabitation with humans.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="icon">&#127806;</div>
+        <h3>Fertile Crescent Origins</h3>
+        <p>Around 7500 BCE, wildcats in the Near East began hunting rodents attracted to grain stores in early farming settlements. This mutually beneficial relationship sparked domestication.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">&#127967;</div>
+        <h3>Sacred in Egypt</h3>
+        <p>Ancient Egyptians revered cats as sacred animals. The goddess Bastet, depicted as a cat, was worshipped widely. Killing a cat, even accidentally, was punishable by death.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">&#127758;</div>
+        <h3>Global Companions</h3>
+        <p>Today cats live on every continent except Antarctica. With over 600 million domestic cats worldwide, they are one of the most successful species on Earth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="container">
+    <h2 class="section-title">Cats Through Time</h2>
+    <p class="section-sub">Key moments in the history of cats and humans.</p>
+    <div class="schedule-list">
+      <div class="schedule-item">
+        <span class="schedule-time">~7500 BCE</span>
+        <div class="schedule-info">
+          <h4>First Domestication</h4>
+          <p>Wildcats (Felis silvestris lybica) begin living alongside humans in the Fertile Crescent, drawn by rodents feeding on stored grain.</p>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">~3000 BCE</span>
+        <div class="schedule-info">
+          <h4>Cats in Ancient Egypt</h4>
+          <p>Cats become deeply embedded in Egyptian society and religion. They are mummified, mourned, and depicted in art alongside pharaohs and gods.</p>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">~500 BCE</span>
+        <div class="schedule-info">
+          <h4>Spread to Asia &amp; Europe</h4>
+          <p>Phoenician traders and Roman soldiers carry cats across the Mediterranean. Cats reach China, India, and eventually northern Europe.</p>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">Middle Ages</span>
+        <div class="schedule-info">
+          <h4>Superstition &amp; Persecution</h4>
+          <p>In medieval Europe, cats &mdash; especially black ones &mdash; become associated with witchcraft and are persecuted. Ironically, their decline may have worsened the plague by allowing rat populations to surge.</p>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">1871</span>
+        <div class="schedule-info">
+          <h4>First Cat Show</h4>
+          <p>The world's first major cat show is held at the Crystal Palace in London, organized by Harrison Weir. It sparks global interest in cat breeding and fancy.</p>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">1960s</span>
+        <div class="schedule-info">
+          <h4>Rise of Indoor Cats</h4>
+          <p>The invention of commercial cat litter by Edward Lowe transforms cats from outdoor mousers into beloved indoor pets, reshaping the human-cat relationship.</p>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">2000s</span>
+        <div class="schedule-info">
+          <h4>Internet Cat Domination</h4>
+          <p>Cats become the undisputed rulers of the internet. From LOLCats to Grumpy Cat, feline content generates billions of views and launches a new era of cat celebrity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUN FACTS -->
+<section id="facts">
+  <div class="container">
+    <h2 class="section-title">By the Numbers</h2>
+    <p class="section-sub">The cat's impact on our world is bigger than you might think.</p>
+    <div class="stats">
+      <div>
+        <div class="stat-num">600M+</div>
+        <div class="stat-label">Domestic Cats Worldwide</div>
+      </div>
+      <div>
+        <div class="stat-num">73</div>
+        <div class="stat-label">Recognized Breeds</div>
+      </div>
+      <div>
+        <div class="stat-num">26</div>
+        <div class="stat-label">Hours of Sleep Per 2 Days</div>
+      </div>
+      <div>
+        <div class="stat-num">10,000</div>
+        <div class="stat-label">Years of Domestication</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POP CULTURE -->
+<section id="culture">
+  <div class="container">
+    <h2 class="section-title">Cats in Pop Culture</h2>
+    <p class="section-sub">Cats have clawed their way into every corner of modern life.</p>
+    <div class="culture-grid">
+      <div class="culture-card">
+        <h4>Internet Royalty</h4>
+        <p>Grumpy Cat, Lil Bub, and Nyan Cat became global sensations. Cat videos are among the most-watched content online, with billions of cumulative views.</p>
+      </div>
+      <div class="culture-card">
+        <h4>Literary Cats</h4>
+        <p>From the Cheshire Cat in Alice in Wonderland to T.S. Eliot's "Old Possum's Book of Practical Cats" (which inspired the musical CATS), felines have captivated authors for centuries.</p>
+      </div>
+      <div class="culture-card">
+        <h4>Studio Ghibli &amp; Anime</h4>
+        <p>Japanese animation celebrates cats endlessly &mdash; from "The Cat Returns" and the Catbus in "My Neighbor Totoro" to the beckoning Maneki-neko figures found worldwide.</p>
+      </div>
+      <div class="culture-card">
+        <h4>Cat Cafes</h4>
+        <p>Originating in Taiwan in 1998 and popularized in Japan, cat cafes have spread globally, offering people a chance to relax with feline companions over coffee.</p>
+      </div>
+      <div class="culture-card">
+        <h4>Famous Ship Cats</h4>
+        <p>Cats have sailed on ships for thousands of years as mousers. Unsinkable Sam survived three shipwrecks in WWII, and Trim circumnavigated Australia with Matthew Flinders.</p>
+      </div>
+      <div class="culture-card">
+        <h4>Space Cat</h4>
+        <p>In 1963, France launched F&eacute;licette into space, making her the first and only cat to travel beyond Earth's atmosphere. She returned safely and became a national icon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 The History of Cats &mdash; A tribute to humanity's most enigmatic companion.</p>
+  <p style="margin-top: .5rem; font-size: .8rem;">Generated by Claude &mdash; Anthropic AI</p>
+</footer>
+
+</body>
+</html>

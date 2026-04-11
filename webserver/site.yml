@@ -1,0 +1,10 @@
+---
+- name: Deploy static web page
+  hosts: all
+  connection: local
+  gather_facts: true
+  become: true
+  vars_files:
+    - vars/nginx.yml
+  roles:
+    - webserver

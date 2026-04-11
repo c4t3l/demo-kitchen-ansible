@@ -1,0 +1,8 @@
+# deploy_app.yml
+# Deploys static webpage
+---
+- name: Deploy static webpage
+  ansible.builtin.copy:
+    src: files/data/index.html
+    dest: '{{ deb_web_loc if ansible_os_family == "Debian" else rh_web_loc }}'
+    mode: '0644'

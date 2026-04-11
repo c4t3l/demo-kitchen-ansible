@@ -1,0 +1,14 @@
+# install.yml
+# Installs nginx webserver
+---
+
+- name: Install nginx webserver
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Start nginx service
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true

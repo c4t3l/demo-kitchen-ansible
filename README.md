@@ -6,7 +6,8 @@ focused on the installation of a web server, and another on the deployment of
 applications for the KDE desktop environment.
 
 Please follow the install steps below to get started.  After successful installation,
-feel free to switch to one of the other branches to try `Kitchen-CI` out!
+feel free to switch to [webserver](webserver) or [workstation](workstation) and try
+it out!!
 
 ---
 ![Static Badge](https://img.shields.io/badge/Tested%20on-Fedora_42-blue)

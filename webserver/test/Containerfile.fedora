@@ -1,0 +1,21 @@
+FROM <%= @image %>
+RUN dnf clean all
+RUN dnf install -y sudo openssh-server openssh-clients which curl ansible-core
+RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+RUN [ -f "/etc/ssh/ssh_host_ed25519_key" ] || ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
+RUN if ! getent passwd kitchen; then \
+    useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen; \
+    fi
+RUN mkdir -p /etc/sudoers.d
+RUN chmod 0750 /etc/sudoers.d
+RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kitchen
+RUN echo "Defaults !requiretty" >> /etc/sudoers.d/kitchen
+RUN mkdir -p /home/kitchen/.ssh
+RUN chown -R kitchen /home/kitchen/.ssh
+RUN chmod 0700 /home/kitchen/.ssh
+RUN touch /home/kitchen/.ssh/authorized_keys
+RUN chown kitchen /home/kitchen/.ssh/authorized_keys
+RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+RUN echo "<%= IO.read(@public_key).strip %>" >> /home/kitchen/.ssh/authorized_keys
+RUN mkdir -p /run/sshd
+CMD /usr/lib/systemd/systemd
