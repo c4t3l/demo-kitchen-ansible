@@ -8,3 +8,5 @@
 .pytest_cache/
 .ruff_cache/
 .tox/
+__pycache__/
+.kitchen.local.yml

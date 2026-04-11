@@ -1,4 +1,5 @@
 ---
+# Production kitchen configuration
 driver:
   name: docker
   use_sudo: false
@@ -51,7 +52,6 @@ suites:
 
 verifier:
   name: shell
-  command: >
-    pytest -vvvrxXs --color=yes -W "ignore::UserWarning"
+  command: tox -e verify --
     --hosts="paramiko://${KITCHEN_USERNAME}@${KITCHEN_HOSTNAME}:${KITCHEN_PORT}?ssh_identity_file=${KITCHEN_SSH_KEY}"
     --sudo test/integration/${KITCHEN_SUITE}
