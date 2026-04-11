@@ -5,7 +5,7 @@ PYTHONENV = .demo-kitchen-ansible
 RUBYENV = ~/.local/share/kitchen-ci/gem
 
 .PHONY: install prereqs ruby python copr verify clean
-install: prereqs ruby python
+install: prereqs ruby python verify
 
 prereqs:
 	./prereqs.sh
@@ -22,15 +22,12 @@ copr:
 	sudo dnf -y copr enable rcallicotte/test-kitchen
 	sudo dnf -y install rubygem-test-kitchen rubygem-kitchen-docker \
 		rubygem-kitchen-qemu rubygem-kitchen-ansible \
-		python-pytest-testinfra qemu qemu-img kiwi-cli podman \
+		python-pytest-testinfra qemu-kvm qemu-img kiwi-cli podman \
 		podman-docker tox python-pytest-testinfra+paramiko
+	$(MAKE) verify
 
 verify:
-	echo "Verifying installation..."
-	kitchen &>/dev/null \
-	|| bundle exec kitchen &>/dev/null \
-	|| echo "Verfication failed!  Reinstall an try again." \
-	echo "Success!!"
+	./verify.sh
 
 clean:
 	rm -rfd $(RUBYENV)
