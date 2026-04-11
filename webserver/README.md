@@ -14,7 +14,7 @@ iterate through changes via the following methods.
 
 ```mermaid
   graph LR;
-    A[kitchen create] --> B[kitchen converge] --> C[kitchen verify] --> D[kitchen destroy]
+    A[kitchen create] --> B[kitchen converge] --> C[kitchen verify] --> D[kitchen destroy];
 ```
 
 ### Kitchen Create
