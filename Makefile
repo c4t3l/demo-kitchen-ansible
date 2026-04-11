@@ -19,10 +19,11 @@ python:
 	$(PYTHONENV)/bin/pip3 install -r requirements.txt
 
 copr:
-	dnf -y copr enable rcallicotte/test-kitchen
-	dnf -y install rubygem-test-kitchen rubygem-kitchen-docker \
+	sudo dnf -y copr enable rcallicotte/test-kitchen
+	sudo dnf -y install rubygem-test-kitchen rubygem-kitchen-docker \
 		rubygem-kitchen-qemu rubygem-kitchen-ansible \
-		python-pytest-testinfra qemu qemu-img kiwi-cli
+		python-pytest-testinfra qemu qemu-img kiwi-cli podman \
+		podman-docker tox python-pytest-testinfra+paramiko
 
 verify:
 	echo "Verifying installation..."
