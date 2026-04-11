@@ -1,0 +1,57 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+  privileged: true
+  binary: ./podman-wrapper.sh
+  require_chef_omnibus: false
+  private_key: .kitchen/podman_id_ed25519
+  public_key: .kitchen/podman_id_ed25519.pub
+  run_command: /usr/lib/systemd/systemd
+
+provisioner:
+  name: ansible_playbook
+  roles_path: roles
+  additional_copy_path: vars
+  ansible_verbose: false
+  ansible_check: false
+  require_chef_for_busser: false
+  hosts: all
+  playbook: site.yml
+  idempotency_test: true
+
+lifecycle:
+  pre_create:
+    - local: >
+        test -f .kitchen/podman_id_ed25519 ||
+        ssh-keygen -t ed25519 -f .kitchen/podman_id_ed25519
+        -N '' -C kitchen_podman_key
+
+platforms:
+  - name: c10s
+    driver:
+      image: docker.io/dokken/centos-stream-10
+      platform: centos
+      dockerfile: test/Containerfile.centos
+
+  - name: d13
+    driver:
+      image: docker.io/dokken/debian-13
+      platform: debian
+      dockerfile: test/Containerfile.debian
+
+  - name: f42
+    driver:
+      image: docker.io/dokken/fedora-42
+      platform: fedora
+      dockerfile: test/Containerfile.fedora
+
+suites:
+  - name: webserver
+
+verifier:
+  name: shell
+  command: >
+    pytest -vvvrxXs --color=yes -W "ignore::UserWarning"
+    --hosts="paramiko://${KITCHEN_USERNAME}@${KITCHEN_HOSTNAME}:${KITCHEN_PORT}?ssh_identity_file=${KITCHEN_SSH_KEY}"
+    --sudo test/integration/${KITCHEN_SUITE}
