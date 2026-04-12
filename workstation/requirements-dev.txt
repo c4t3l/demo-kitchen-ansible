@@ -1,0 +1,6 @@
+pytest>=8.3.4
+pytest-testinfra[ansible,paramiko]>=10.2.2
+ansible-lint
+ruff==0.13.1
+mypy==1.18.1
+types-PyYAML

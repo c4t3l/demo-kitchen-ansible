@@ -1,0 +1,51 @@
+---
+driver:
+  name: qemu
+  memory: 4096
+  cpus: 4
+  bios: /usr/share/edk2/ovmf/OVMF_CODE.fd
+
+
+provisioner:
+  name: ansible_playbook
+  roles_path: roles
+  additional_copy_path: vars
+  ansible_verbose: false
+  ansible_check: false
+  require_chef_for_busser: false
+  hosts: all
+  playbook: site.yml
+  idempotency_test: true
+
+platforms:
+  - name: f42
+    driver:
+      image: Fedora-KDE.x86_64-42.qcow2
+      display: <%= ENV['DPY'] || 'none' %>
+
+  - name: f43
+    driver:
+      image: Fedora-KDE.x86_64-43.qcow2
+      display: <%= ENV['DPY'] || 'none' %>
+
+  - name: rawhide
+    driver:
+      image: Fedora-KDE.x86_64-Rawhide.qcow2
+      display: <%= ENV['DPY'] || 'none' %>
+
+lifecycle:
+  post_create:
+    - remote: >
+        sudo dnf -y install
+        ansible-collection-community-general
+        python3-passlib
+
+suites:
+  - name: kde
+
+verifier:
+  name: shell
+  command: >
+    pytest -vvvrxXs --color=yes
+    --hosts="paramiko://${KITCHEN_USERNAME}@${KITCHEN_HOSTNAME}:${KITCHEN_PORT}?ssh_identity_file=${KITCHEN_SSH_KEY}"
+    --sudo test/integration/${KITCHEN_SUITE}

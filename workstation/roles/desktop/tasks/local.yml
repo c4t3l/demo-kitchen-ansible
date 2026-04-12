@@ -1,0 +1,56 @@
+# Deploy KDE user configs
+---
+
+- name: Deploy konsolerc config
+  ansible.builtin.copy:
+    src: files/konsole/konsolerc
+    dest: "/home/{{ user['username'] }}/.config/konsolerc"
+    owner: "{{ user['username'] }}"
+    group: "{{ user['username'] }}"
+
+- name: Create konsole config dir
+  ansible.builtin.file:
+    path: "/home/{{ user['username'] }}/.local/share/konsole/"
+    owner: "{{ user['username'] }}"
+    group: "{{ user['username'] }}"
+    state: directory
+
+- name: Deploy konsole profile
+  ansible.builtin.copy:
+    src: files/konsole/green.profile
+    dest: "/home/{{ user['username'] }}/.local/share/konsole/green.profile"
+    owner: "{{ user['username'] }}"
+    group: "{{ user['username'] }}"
+
+- name: Download Oh My Zsh installer
+  ansible.builtin.get_url:
+    url: "{{ zshconf['url'] }}"
+    dest: /tmp/install_ohmyzsh.sh
+
+- name: Install Oh My Zsh
+  ansible.builtin.command:
+    cmd: sh /tmp/install_ohmyzsh.sh --unattended
+    creates: "/home/{{ user['username'] }}/.oh-my-zsh"
+  become: true
+  become_user: "{{ user['username'] }}"
+
+- name: Deploy zshrc
+  ansible.builtin.copy:
+    src: files/zsh/zshrc
+    dest: "/home/{{ user['username'] }}/.zshrc"
+    owner: "{{ user['username'] }}"
+    group: "{{ user['username'] }}"
+
+- name: Create zsh_home dir
+  ansible.builtin.file:
+    path: "/home/{{ user['username'] }}/.zsh_home"
+    owner: "{{ user['username'] }}"
+    group: "{{ user['username'] }}"
+    state: directory
+
+- name: Deploy home.zsh
+  ansible.builtin.copy:
+    src: files/zsh/home.zsh
+    dest: "/home/{{ user['username'] }}/.zsh_home/home.zsh"
+    owner: "{{ user['username'] }}"
+    group: "{{ user['username'] }}"
