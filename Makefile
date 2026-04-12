@@ -1,7 +1,6 @@
 # Installation of kitchen components
 
 SHELL = /bin/bash
-PYTHONENV = .demo-kitchen-ansible
 RUBYENV = ~/.local/share/kitchen-ci/gem
 
 .PHONY: install prereqs ruby python copr verify clean
@@ -13,10 +12,6 @@ prereqs:
 ruby:
 	bundle config set --local path $(RUBYENV)
 	bundle install --gemfile=Gemfile
-
-python:
-	python3 -m venv $(PYTHONENV)
-	$(PYTHONENV)/bin/pip3 install -r requirements.txt
 
 copr:
 	sudo dnf -y copr enable rcallicotte/test-kitchen
@@ -31,4 +26,3 @@ verify:
 
 clean:
 	rm -rfd $(RUBYENV)
-	rm -rfd $(PYTHONENV)

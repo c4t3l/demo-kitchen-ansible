@@ -27,6 +27,7 @@ if [ "$PKG_MANAGER" = "apt" ]; then
     python3 \
     python3-pip \
     python3.13-venv \
+    tox \
     ruby \
     ruby-dev \
     bundler \
@@ -43,13 +44,14 @@ elif [ "$PKG_MANAGER" = "dnf" ]; then
     podman \
     python3 \
     python3-pip \
+    python3-tox \
     ruby \
     ruby-devel \
     rubygem-bundler \
     make \
     gcc \
     libyaml-devel \
-    qemu \
+    qemu-system \
     qemu-img \
     kiwi-cli
 
@@ -59,6 +61,7 @@ elif [ "$PKG_MANAGER" = "pacman" ]; then
     podman \
     python \
     python-pip \
+    python-tox \
     ruby \
     ruby-bundler \
     base-devel \
@@ -71,6 +74,7 @@ fi
 echo "Verifying installations..."
 python3 --version || true
 pip3 --version || true
+tox --version || true
 ruby --version || true
 bundle --version || true
 gcc --version || true
