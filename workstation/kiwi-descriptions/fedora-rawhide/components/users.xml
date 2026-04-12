@@ -1,0 +1,7 @@
+<image>
+	<users profiles="BootCore">
+		<!-- The password here does not matter, it will be erased in config.sh -->
+		<user name="root" groups="root" password="linux" home="/root" pwdformat="plain" />
+		<user name="kitchen" groups="kitchen" password="kitchen" home="/home/kitchen" pwdformat="plain" />
+	</users>
+</image>
