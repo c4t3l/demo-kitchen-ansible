@@ -10,3 +10,4 @@
 .tox/
 __pycache__/
 .kitchen.local.yml
+kiwi-build/

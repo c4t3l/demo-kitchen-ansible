@@ -1,0 +1,50 @@
+<image>
+	<profiles>
+		<profile name="DesktopCommon" description="Common desktop packages">
+			<requires profile="BaseCommon"/>
+			<requires profile="HardwareCommon"/>
+		</profile>
+		<profile name="KDE-Desktop" description="KDE Plasma Desktop">
+			<requires profile="DesktopCommon"/>
+		</profile>
+	</profiles>
+	<packages type="image" patternType="plusRecommended" profiles="DesktopCommon">
+		<namedCollection name="fonts"/>
+		<namedCollection name="multimedia"/>
+		<namedCollection name="networkmanager-submodules"/>
+		<namedCollection name="printing"/>
+		<namedCollection name="guest-desktop-agents"/>
+		<package name="mediawriter"/>
+		<ignore name="gfs2-utils"/>
+		<ignore name="reiserfs-utils"/>
+	</packages>
+	<!-- Common exclusions for KDE variants -->
+	<packages type="image" patternType="plusRecommended" profiles="KDE-Desktop">
+		<ignore name="gnome-disk-utility"/> <!-- redundant with kde partitionmanager -->
+		<ignore name="mariadb-server-utils"/> <!-- Not needed on desktops (pagure.io:fedora-kde/SIG#566) -->
+		<ignore name="system-config-language"/> <!-- redundant with kcms -->
+		<ignore name="system-config-printer"/> <!-- redundant with kcms -->
+		<!-- drop tracker stuff pulled in by gtk3 (pagureio:fedora-kde/SIG#124) -->
+		<ignore name="tracker"/>
+		<ignore name="tracker-miners"/>
+		<!-- space issues -->
+		<ignore name="digikam"/> <!-- digikam has duplicate functionality with gwenview (~28 megs) -->
+		<ignore name="k3b"/> <!-- ~15 megs -->
+		<ignore name="kipi-plugins"/> <!-- ~8 megs + drags in marble -->
+		<ignore name="krusader"/> <!-- ~4 megs -->
+		<ignore name="ktorrent"/> <!-- ~15 megs -->
+	</packages>
+	<packages type="image" patternType="plusRecommended" profiles="KDE-Desktop">
+		<!-- install env-group to resolve RhBug:1891500 -->
+		<namedCollection name="kde-desktop-environment"/>
+		<namedCollection name="kde-apps"/>
+		<namedCollection name="kde-media"/>
+		<namedCollection name="kde-pim" arch="x86_64"/>
+		<namedCollection name="firefox"/>
+		<namedCollection name="libreoffice"/>
+		<package name="libreoffice-draw"/>
+		<package name="libreoffice-math"/>
+		<package name="fuse"/>
+		<package name="kde-l10n"/>
+	</packages>
+</image>
