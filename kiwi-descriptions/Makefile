@@ -4,9 +4,9 @@ SHELL = /bin/bash
 WORKDIR = fedora
 VERSION = rawhide
 
-.PHONY: prep build convert install clean
+.PHONY: prep build convert clean
 
-all: prep build convert install clean
+all: prep build convert clean
 
 prep:
 	mkdir -p $$HOME/.config/kitchen-qemu
