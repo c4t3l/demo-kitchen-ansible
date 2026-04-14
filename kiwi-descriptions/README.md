@@ -6,7 +6,9 @@ and is licensed under GPL-3-or-later.
 
 ## Build instructions
 
-Run `make VERSION=<fedora branched version (ie 43)>` to build a branched version
+Run `make VERSION=43 all` to build branched version 43
 of Fedora KDE.  Omitting the `VERSION` parameter builds Fedora `rawhide` version.
 
 The completed artifact is written to `$HOME/.config/kitchen-qemu`.
+
+For help run `make help`.
