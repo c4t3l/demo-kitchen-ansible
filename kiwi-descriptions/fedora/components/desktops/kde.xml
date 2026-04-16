@@ -33,6 +33,7 @@
 		<ignore name="kipi-plugins"/> <!-- ~8 megs + drags in marble -->
 		<ignore name="krusader"/> <!-- ~4 megs -->
 		<ignore name="ktorrent"/> <!-- ~15 megs -->
+		<ignore name="plasma-setup"/> <!-- New in 6.6 release, skipping for demo -->
 	</packages>
 	<packages type="image" patternType="plusRecommended" profiles="KDE-Desktop">
 		<!-- install env-group to resolve RhBug:1891500 -->

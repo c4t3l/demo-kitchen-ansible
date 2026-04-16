@@ -19,7 +19,6 @@
 	<include from="this://./components/boot.xml"/>
 	<include from="this://./components/desktops/kde.xml"/>
 	<include from="this://./components/users.xml"/>
-			<!-- <include from="this://./teams/base.xml"/> -->
 	<include from="this://./teams/kde.xml"/>
 	<packages type="bootstrap">
 		<package name="filesystem"/>

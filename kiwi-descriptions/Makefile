@@ -18,7 +18,7 @@ help:
 	        printf "\n\033[1m%s\033[0m\n", substr($$0, 5); \
 	}' $(MAKEFILE_LIST)
 
-all: prep build install clean
+all: prep build install
 
 prep: ## Prepares install dest and templates
 	mkdir -p $$HOME/.config/kitchen-qemu
@@ -30,12 +30,14 @@ build: ## builds the defined image
 		--image-type=oem \
 		--image-profile=KDE-Desktop-Disk \
 		--output-dir=$(WORKDIR)/output
+	@echo "[ INFO ] Kiwi build complete."
 
 install: ## converts and installs image
 	qemu-img convert -p $(WORKDIR)/output-build/Fedora.x86_64-$(VERSION).raw \
 		$$HOME/.config/kitchen-qemu/Fedora.x86_64-$(VERSION).qcow2
+	@echo "[ INFO ] Kiwi install complete."
 
 clean: ## removes workdir and tempfiles
 	sudo rm -rfd $(WORKDIR)/output-build
 	rm -f $(WORKDIR)/.Fedora.kiwi_tmp
-	@echo "[ INFO ] Kiwi build complete"
+	@echo "[ INFO ] Removed Kiwi tempfiles."
