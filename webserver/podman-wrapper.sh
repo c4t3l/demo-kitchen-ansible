@@ -3,7 +3,7 @@
 
 set +x
 # Podman/docker socket settings
-DOCKER_HOST="unix://run/user/$(id -u)/podman/podman.socket"
+DOCKER_HOST="unix://run/user/$(id -u)/podman/podman.sock"
 export DOCKER_HOST
 
 # If no real subcommand is given (just redirected to /dev/null), exit 0
