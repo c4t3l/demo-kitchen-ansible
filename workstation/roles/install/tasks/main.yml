@@ -21,6 +21,8 @@
       # - rubygem-kitchen-qemu
       # - rubygem-kitchen-salt
       # - rubygem-test-kitchen
-      - vimde
+      # Upstream copr is temporarily broken due
+      # to PULP migrations
+      # - vimde
       - yamllint
       - zsh
